@@ -101,7 +101,22 @@ Your assets live in `public/`:
 | `logo-mark.png` | The "D" glyph — header (used as a CSS mask) |
 | `logo-lockup.png` | Mark + `DIDIRU.ID` wordmark — footer (CSS mask) |
 | `logo-mark-light.png` | Light version, used in the social share image |
+| `icon-512.png` | Source used to build the browser/app icons |
 | `foto.jpg` | Your portrait — hero |
+
+The browser tab icon and home-screen icons are Next.js file conventions in
+`src/app/`:
+
+| File | Emits |
+| --- | --- |
+| `favicon.ico` | `<link rel="icon" type="image/x-icon">` — 16/32/48 px |
+| `icon.png` | `<link rel="icon" type="image/png" sizes="512x512">` |
+| `apple-icon.png` | `<link rel="apple-touch-icon" sizes="180x180">` |
+
+They are built from `logo-mark-light.png` — the pale "D" glyph on the brand
+navy. To regenerate them after changing the logo, rebuild `icon-512.png` and
+re-run the ImageMagick step (`convert public/icon-512.png
+-define icon:auto-resize=16,32,48 src/app/favicon.ico`).
 
 The logo is applied as a **CSS mask**, so a single file is recoloured to follow
 the theme: brand navy (`--brand: #04243c`) on light, pale (`#e8f0fa`) on dark.
@@ -171,6 +186,10 @@ public/
   cv-didi-rudiat.pdf   <- your CV
   foto.jpg             <- your portrait
   logo*.png            <- your logo
+src/app/
+  icon.png             <- browser tab icon
+  apple-icon.png       <- iOS home screen icon
+  favicon.ico          <- legacy browser tab icon
 ```
 
 ## Deploying
