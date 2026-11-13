@@ -34,6 +34,8 @@ press start:
    player picks the right quality for the viewer's connection.
 
 The output file extension is `.wg-video` — an encrypted archive, not a video.
+It is the hand-off format for the **WgVideo** platform, which serves the
+streams and plays them back with Video.js.
 
 ### Why a desktop app
 

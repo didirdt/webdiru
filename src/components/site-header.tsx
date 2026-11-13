@@ -19,6 +19,12 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-2">
           <a
+            href="#expertise"
+            className="rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:bg-surface-hover hover:text-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
+            Expertise
+          </a>
+          <a
             href="#projects"
             className="rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:bg-surface-hover hover:text-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           >

@@ -27,30 +27,32 @@ Open [http://localhost:3000](http://localhost:3000).
 ### 1. Your details
 
 Edit `src/lib/site.ts` — name, role, headline, intro, email, and social links
-all live there. Also update `site.url` to your real domain; it is used for
+all live there. `site.url` is already set to your real domain and is used for
 metadata, `sitemap.xml`, `robots.txt`, and the social share image.
 
-**Placeholders to replace before you deploy:**
+**Still worth a look before you deploy:**
 
-| Placeholder | Where |
+| Item | Where |
 | --- | --- |
-| `site.url` = `https://example.com` | `src/lib/site.ts` |
-| GitHub / LinkedIn URLs | `src/lib/site.ts` → `site.links` |
 | Project details, dates, and links | `content/projects/*.md` |
+| The Expertise section | `src/lib/site.ts` → `skillGroups` |
 
-The project files were written from your CV as a starting point. **Please
-correct the details, dates, and links** — they are drafts, not facts.
+Your GitHub (`github.com/didirdt`) and LinkedIn
+(`linkedin.com/in/didi-rudiat-341448b4`) are already set.
 
-### 2. Your CV
+### 2. Your expertise
+
+The **Expertise** section is driven by `skillGroups` in `src/lib/site.ts` —
+an array of `{ title, note, items }`. Add, remove, or reword entries there and
+the section re-renders. There is no separate component to touch.
+
+### 3. Your CV
 
 Your CV is served at [`/cv-didi-rudiat.pdf`](public/cv-didi-rudiat.pdf) and is
 linked from the hero button and the footer. To replace it, drop a new PDF in
 `public/` and update `site.cv` in `src/lib/site.ts`.
 
-(The original `cv didi-en.pdf` is still in the project root. It is not used by
-the site — you can delete it, or keep it as a backup.)
-
-### 3. Your projects
+### 4. Your projects
 
 Every project is a Markdown file in `content/projects/`. Create a new file and
 it appears on the site automatically.
@@ -80,13 +82,13 @@ The body of the project. **Markdown works**, including:
 
 The filename becomes the slug, so `my-project.md` → `my-project`.
 
-### 4. Colours and fonts
+### 5. Colours and fonts
 
 Design tokens live in `src/app/globals.css`. The light and dark palettes are
 CSS variables under `:root` and `.dark`; change them there and the whole site
 follows. Fonts are configured in `src/app/layout.tsx` via `next/font`.
 
-### 5. Images
+### 6. Images
 
 Each project card shows a **blurred cover**; the detail dialog shows a **sharp
 image** of the same project.
@@ -107,7 +109,7 @@ monitor, phone frames for the mobile apps, a chart for the dashboard).
 To use your own images, drop them in `public/covers/` and `public/projects/`
 with matching names and update the frontmatter. Keep them 1200×630 (16:9).
 
-### 6. Logo and photo
+### 7. Logo and photo
 
 Your assets live in `public/`:
 
@@ -185,6 +187,7 @@ src/
     opengraph-image.tsx / twitter-image.tsx   social share image
   components/
     hero.tsx
+    expertise.tsx
     site-header.tsx / site-footer.tsx
     project-grid.tsx  client: tag filters
     project-card.tsx
@@ -192,7 +195,7 @@ src/
     theme-toggle.tsx  client
     icons.tsx
   lib/
-    site.ts           your details
+    site.ts           your details + expertise groups
     projects.ts       markdown loader
     markdown.ts       markdown renderer
     og-image.tsx      social share image

@@ -1,15 +1,15 @@
 ---
 title: "Cross-Platform Mobile Apps"
-summary: "Shipping the same product to iOS and Android from one codebase with Flutter and React Native."
+summary: "Shipping the same product to iOS and Android from one codebase with Flutter, sharing logic with the web backend."
 year: 2023
 status: shipped
-tags: ["mobile", "flutter", "react-native"]
-stack: ["Flutter", "Dart", "React Native", "REST API", "MySQL"]
-cover: "/covers/mobile-apps.webp"
-image: "/projects/mobile-apps.webp"
+tags: ["mobile", "flutter", "frontend"]
+stack: ["Flutter", "Dart", "RESTful API", "MySQL", "MongoDB"]
 links:
-  - { label: "Portfolio", href: "https://github.com/your-handle" }
-accent: "#10b981"
+  - { label: "GitHub", href: "https://github.com/didirdt" }
+image: "/projects/mobile-apps.webp"
+cover: "/covers/mobile-apps.webp"
+accent: "#8b5cf6"
 ---
 
 Mobile work that shares its logic with the web backend — the same REST API,
@@ -21,18 +21,12 @@ The first app I shipped with Flutter taught me how much of a mobile codebase
 is not UI. The interesting work was in offline storage, background sync, and
 handling a session that expired mid-request.
 
-### React Native
-
-Later work moved to React Native to share components with the existing React
-web app. The win was real but narrower than expected: business logic and API
-clients transferred cleanly, the view layer did not.
-
 ### What I'd do differently
 
 Set up crash reporting and a proper release pipeline *before* the first
 release. Shipping to a store taught me that a build you cannot reproduce is a
 build you cannot hotfix.
 
-### Stack
+### Background
 
-Flutter · Dart · React Native · REST API · MySQL · RESTful API
+**Flutter** · **Dart** · **RESTful API** · **MySQL** · **MongoDB**

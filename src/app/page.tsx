@@ -1,3 +1,4 @@
+import { Expertise } from "@/components/expertise";
 import { Hero } from "@/components/hero";
 import { ProjectGrid } from "@/components/project-grid";
 import { SiteFooter } from "@/components/site-footer";
@@ -16,9 +17,11 @@ export default function Home() {
       <main className="flex-1">
         <Hero projectCount={projects.length} stackCount={stackCount} />
 
+        <Expertise />
+
         <section
           id="projects"
-          className="mx-auto max-w-6xl scroll-mt-20 px-5 sm:px-8"
+          className="mx-auto mt-24 max-w-6xl scroll-mt-20 px-5 sm:px-8"
         >
           <div className="border-t border-border pt-12">
             <h2 className="text-2xl font-bold tracking-tight text-fg sm:text-3xl">
