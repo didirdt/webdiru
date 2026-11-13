@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 import { ArrowUpRightIcon, CloseIcon } from "@/components/icons";
@@ -137,6 +138,17 @@ export function ProjectDialog({ project, onClose }: ProjectDialogProps) {
           </div>
 
           <div className="overflow-y-auto px-6 py-5">
+            {project.image || project.cover ? (
+              <Image
+                src={project.image ?? project.cover!}
+                alt=""
+                width={1200}
+                height={630}
+                sizes="(max-width: 768px) 100vw, 46rem"
+                className="mb-5 aspect-[16/9] w-full rounded-xl object-cover ring-1 ring-border"
+              />
+            ) : null}
+
             {project.summary ? (
               <p className="text-sm leading-relaxed text-pretty text-muted">
                 {project.summary}

@@ -5,6 +5,8 @@ year: 2021
 status: shipped
 tags: ["python", "networking", "linux", "devops"]
 stack: ["Python", "SNMP", "Linux", "MQTT", "Docker", "Grafana"]
+cover: "/covers/network-monitor.webp"
+image: "/projects/network-monitor.webp"
 links:
   - { label: "Source", href: "https://github.com/your-handle" }
 accent: "#14b8a6"

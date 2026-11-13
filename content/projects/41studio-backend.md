@@ -5,6 +5,8 @@ year: 2019
 status: shipped
 tags: ["ruby", "rails", "php", "api"]
 stack: ["Ruby on Rails", "PostgreSQL", "Sidekiq", "Redis", "CodeIgniter", "REST API"]
+cover: "/covers/41studio-backend.webp"
+image: "/projects/41studio-backend.webp"
 links:
   - { label: "Studio", href: "https://41studio.co" }
 accent: "#6366f1"

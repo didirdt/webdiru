@@ -5,6 +5,8 @@ year: 2018
 status: shipped
 tags: ["php", "codeigniter", "enterprise", "mysql"]
 stack: ["PHP", "CodeIgniter", "MySQL", "jQuery", "AJAX", "Bootstrap"]
+cover: "/covers/inventory-system.webp"
+image: "/projects/inventory-system.webp"
 links:
   - { label: "Studio", href: "https://41studio.co" }
 accent: "#f59e0b"

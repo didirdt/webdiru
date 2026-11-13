@@ -5,6 +5,8 @@ year: 2023
 status: shipped
 tags: ["nodejs", "react", "realtime", "aws"]
 stack: ["Node.js", "React", "PostgreSQL", "Redis", "WebSocket", "AWS"]
+cover: "/covers/wellcode-platform.webp"
+image: "/projects/wellcode-platform.webp"
 links:
   - { label: "Company", href: "https://wellcode.io" }
 accent: "#0ea5e9"

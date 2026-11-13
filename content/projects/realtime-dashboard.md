@@ -5,6 +5,8 @@ year: 2022
 status: shipped
 tags: ["realtime", "nodejs", "dashboard", "websocket"]
 stack: ["Node.js", "WebSocket", "Redis", "PostgreSQL", "React", "Chart.js"]
+cover: "/covers/realtime-dashboard.webp"
+image: "/projects/realtime-dashboard.webp"
 links:
   - { label: "Company", href: "https://wellcode.io" }
 accent: "#8b5cf6"

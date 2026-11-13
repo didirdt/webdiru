@@ -5,6 +5,8 @@ year: 2023
 status: shipped
 tags: ["mobile", "flutter", "react-native"]
 stack: ["Flutter", "Dart", "React Native", "REST API", "MySQL"]
+cover: "/covers/mobile-apps.webp"
+image: "/projects/mobile-apps.webp"
 links:
   - { label: "Portfolio", href: "https://github.com/your-handle" }
 accent: "#10b981"

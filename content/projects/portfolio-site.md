@@ -5,6 +5,8 @@ year: 2026
 status: shipped
 tags: ["nextjs", "typescript", "tailwind", "design"]
 stack: ["Next.js 16", "TypeScript", "Tailwind CSS v4", "Markdown", "React 19"]
+cover: "/covers/portfolio-site.webp"
+image: "/projects/portfolio-site.webp"
 links:
   - { label: "Source", href: "https://github.com/your-handle" }
   - { label: "Download CV", href: "/cv-didi-rudiat.pdf" }

@@ -66,7 +66,8 @@ stack: ["Next.js", "TypeScript", "PostgreSQL"]
 links:
   - { label: "Live", href: "https://example.com" }
   - { label: "Source", href: "https://github.com/you/project" }
-cover: /projects/my-project.webp   # optional, place the file in /public/projects/
+cover: "/projects/my-project.webp"   # optional, place the file in /public/projects/
+image: "/projects/my-project.webp"   # optional, sharp image for the detail dialog
 accent: "#6366f1"                  # optional, colour for the generated cover
 featured: true                     # optional
 ---
@@ -87,9 +88,24 @@ follows. Fonts are configured in `src/app/layout.tsx` via `next/font`.
 
 ### 5. Images
 
-Drop a file in `public/projects/` and reference it from the frontmatter with
-`cover: /projects/your-file.webp`. Without a cover, the site generates a
-gradient from the project's `accent` colour.
+Each project card shows a **blurred cover**; the detail dialog shows a **sharp
+image** of the same project.
+
+| Frontmatter | Used for | Folder |
+| --- | --- | --- |
+| `cover:` | Blurred background of the card | `public/covers/` |
+| `image:` | Sharp image at the top of the dialog | `public/projects/` |
+
+Both are optional — a project without them falls back to a gradient built from
+its `accent` colour.
+
+The current covers are real: a screenshot of the Taxsam encoder app, the USSI
+IBS Core site, the Taxsam Learning Center, and this site itself. The rest are
+generated artwork themed to each project (a node graph for the network
+monitor, phone frames for the mobile apps, a chart for the dashboard).
+
+To use your own images, drop them in `public/covers/` and `public/projects/`
+with matching names and update the frontmatter. Keep them 1200×630 (16:9).
 
 ### 6. Logo and photo
 
@@ -186,6 +202,8 @@ public/
   cv-didi-rudiat.pdf   <- your CV
   foto.jpg             <- your portrait
   logo*.png            <- your logo
+  covers/*.webp        <- blurred card backgrounds
+  projects/*.webp      <- sharp images for the detail dialog
 src/app/
   icon.png             <- browser tab icon
   apple-icon.png       <- iOS home screen icon

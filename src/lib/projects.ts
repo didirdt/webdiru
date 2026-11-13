@@ -19,6 +19,7 @@ type Frontmatter = {
   stack?: string[];
   links?: ProjectLink[];
   cover?: string;
+  image?: string;
   accent?: string;
   featured?: boolean;
 };
@@ -72,6 +73,7 @@ function parseProject(fileName: string): Project {
 
   const year = Number(fm.year);
   const cover = typeof fm.cover === "string" && fm.cover.trim() ? fm.cover.trim() : null;
+  const image = typeof fm.image === "string" && fm.image.trim() ? fm.image.trim() : null;
   const accent = typeof fm.accent === "string" && fm.accent.trim() ? fm.accent.trim() : null;
 
   return {
@@ -84,6 +86,7 @@ function parseProject(fileName: string): Project {
     stack: asStringArray(fm.stack),
     links: asLinks(fm.links),
     cover,
+    image,
     accent: accent ?? fallbackAccent(slug),
     featured: fm.featured === true,
     body: renderMarkdown(content),
