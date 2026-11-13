@@ -5,14 +5,16 @@ export function SiteFooter() {
   return (
     <footer className="mt-24 border-t border-border">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-8">
-        <div className="space-y-1">
-          <p className="text-sm font-semibold text-fg">{site.name}</p>
-          <p className="text-sm text-muted">
-            {site.role} · {site.location}
-          </p>
-          <p className="text-sm text-subtle">
-            © {site.year} · Built with Next.js &amp; Tailwind CSS
-          </p>
+        <div className="space-y-4">
+          <span aria-hidden className="logo-lockup block h-16 w-[5.5rem] text-brand" />
+          <div className="space-y-1">
+            <p className="text-sm text-muted">
+              {site.role} · {site.location}
+            </p>
+            <p className="text-sm text-subtle">
+              © {site.year} · Built with Next.js &amp; Tailwind CSS
+            </p>
+          </div>
         </div>
 
         <ul className="flex items-center gap-1">

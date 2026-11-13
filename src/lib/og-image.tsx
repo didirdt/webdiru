@@ -1,9 +1,19 @@
+import fs from "node:fs";
+import path from "node:path";
+
 import { ImageResponse } from "next/og";
 
 import { site } from "@/lib/site";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+
+/** Read once at build time and inline as a data URI. */
+const logo = fs
+  .readFileSync(path.join(process.cwd(), "public", "logo-mark-light.png"))
+  .toString("base64");
+
+const logoUri = `data:image/png;base64,${logo}`;
 
 const chips = [
   "Ruby on Rails",
@@ -34,22 +44,12 @@ export async function renderOgImage() {
       >
         {/* Name row */}
         <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "68px",
-              height: "68px",
-              borderRadius: "18px",
-              backgroundColor: "#818cf8",
-              color: "#0b0b14",
-              fontSize: "30px",
-              fontWeight: 700,
-            }}
-          >
-            {site.initials}
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element -- Satori (next/og) only supports a plain <img> */}
+          <img
+            src={logoUri}
+            alt=""
+            style={{ width: 66, height: 54, objectFit: "contain" }}
+          />
           <div
             style={{
               display: "flex",

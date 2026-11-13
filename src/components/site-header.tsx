@@ -10,9 +10,10 @@ export function SiteHeader() {
           href="#top"
           className="group flex items-center gap-2.5 text-sm font-semibold tracking-tight text-fg"
         >
-          <span className="flex size-7 items-center justify-center rounded-lg bg-accent text-[13px] font-bold text-accent-fg transition-transform duration-200 group-hover:scale-105">
-            {site.initials}
-          </span>
+          <span
+            aria-hidden
+            className="logo-mark h-7 w-8 shrink-0 text-brand transition-transform duration-200 group-hover:scale-105"
+          />
           <span className="hidden sm:inline">{site.name}</span>
         </a>
 

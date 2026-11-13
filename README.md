@@ -91,6 +91,30 @@ Drop a file in `public/projects/` and reference it from the frontmatter with
 `cover: /projects/your-file.webp`. Without a cover, the site generates a
 gradient from the project's `accent` colour.
 
+### 6. Logo and photo
+
+Your assets live in `public/`:
+
+| File | Used for |
+| --- | --- |
+| `logo.png` | Your original file, kept as-is |
+| `logo-mark.png` | The "D" glyph — header (used as a CSS mask) |
+| `logo-lockup.png` | Mark + `DIDIRU.ID` wordmark — footer (CSS mask) |
+| `logo-mark-light.png` | Light version, used in the social share image |
+| `foto.jpg` | Your portrait — hero |
+
+The logo is applied as a **CSS mask**, so a single file is recoloured to follow
+the theme: brand navy (`--brand: #04243c`) on light, pale (`#e8f0fa`) on dark.
+Only the alpha channel is used, which is why the files are palette-quantised
+and small.
+
+To use a different logo, replace `logo-mark.png` and `logo-lockup.png` with
+transparent-background PNGs of the same proportions (mark ≈ 227×186, lockup ≈
+373×270) and update the `--brand` token in `src/app/globals.css`.
+
+To change the portrait, replace `public/foto.jpg` — it is rendered at a 4:5
+crop, focused near the top of the image.
+
 ## How it works
 
 ```
@@ -145,6 +169,8 @@ src/
 content/projects/      <- your project files
 public/
   cv-didi-rudiat.pdf   <- your CV
+  foto.jpg             <- your portrait
+  logo*.png            <- your logo
 ```
 
 ## Deploying

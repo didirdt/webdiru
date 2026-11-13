@@ -23,6 +23,9 @@
   --accent-fg: #ffffff;
   --accent-soft: rgb(79 70 229 / 0.1);
 
+  /* Brand colour taken from logo.png */
+  --brand: #04243c;
+
   --elev-card: 0 1px 2px rgb(0 0 0 / 0.04), 0 10px 26px -16px rgb(0 0 0 / 0.22);
   --elev-card-hover: 0 2px 4px rgb(0 0 0 / 0.05),
     0 18px 42px -18px rgb(0 0 0 / 0.3);
@@ -46,6 +49,8 @@
   --accent-fg: #0b0b14;
   --accent-soft: rgb(129 140 248 / 0.12);
 
+  --brand: #e8f0fa;
+
   --elev-card: 0 1px 2px rgb(0 0 0 / 0.5), 0 10px 26px -16px rgb(0 0 0 / 0.85);
   --elev-card-hover: 0 2px 4px rgb(0 0 0 / 0.55),
     0 18px 42px -18px rgb(0 0 0 / 0.9);
@@ -68,6 +73,7 @@
   --color-accent-hover: var(--accent-hover);
   --color-accent-fg: var(--accent-fg);
   --color-accent-soft: var(--accent-soft);
+  --color-brand: var(--brand);
 
   --shadow-card: var(--elev-card);
   --shadow-card-hover: var(--elev-card-hover);
@@ -125,6 +131,24 @@
     outline: 2px solid var(--accent);
     outline-offset: 2px;
   }
+}
+
+/* ------------------------------------------------------------------ *
+ * Logo
+ *
+ * The mark and the lockup are used as CSS masks so a single asset can
+ * be recoloured to follow the theme (brand navy on light, pale on dark).
+ * ------------------------------------------------------------------ */
+.logo-mark {
+  -webkit-mask: url("/logo-mark.png") center / contain no-repeat;
+  mask: url("/logo-mark.png") center / contain no-repeat;
+  background-color: currentColor;
+}
+
+.logo-lockup {
+  -webkit-mask: url("/logo-lockup.png") center / contain no-repeat;
+  mask: url("/logo-lockup.png") center / contain no-repeat;
+  background-color: currentColor;
 }
 
 /* ------------------------------------------------------------------ *
