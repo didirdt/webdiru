@@ -1,36 +1,167 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio
 
-## Getting Started
+A personal project list and portfolio site. One page, Markdown-driven content,
+light/dark themes, and no CMS to maintain.
 
-First, run the development server:
+Built with **Next.js 16** (App Router, Cache Components), **React 19**,
+**TypeScript**, and **Tailwind CSS v4**.
+
+## Quick start
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Script | What it does |
+| --- | --- |
+| `npm run dev` | Development server with hot reload |
+| `npm run build` | Production build (fully static output) |
+| `npm run start` | Serve the production build |
+| `npm run lint` | ESLint (flat config) |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Making it yours
 
-## Learn More
+### 1. Your details
 
-To learn more about Next.js, take a look at the following resources:
+Edit `src/lib/site.ts` — name, role, headline, intro, email, and social links
+all live there. Also update `site.url` to your real domain; it is used for
+metadata, `sitemap.xml`, `robots.txt`, and the social share image.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Placeholders to replace before you deploy:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Placeholder | Where |
+| --- | --- |
+| `site.url` = `https://example.com` | `src/lib/site.ts` |
+| GitHub / LinkedIn URLs | `src/lib/site.ts` → `site.links` |
+| Project details, dates, and links | `content/projects/*.md` |
 
-## Deploy on Vercel
+The project files were written from your CV as a starting point. **Please
+correct the details, dates, and links** — they are drafts, not facts.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 2. Your CV
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Your CV is served at [`/cv-didi-rudiat.pdf`](public/cv-didi-rudiat.pdf) and is
+linked from the hero button and the footer. To replace it, drop a new PDF in
+`public/` and update `site.cv` in `src/lib/site.ts`.
+
+(The original `cv didi-en.pdf` is still in the project root. It is not used by
+the site — you can delete it, or keep it as a backup.)
+
+### 3. Your projects
+
+Every project is a Markdown file in `content/projects/`. Create a new file and
+it appears on the site automatically.
+
+```markdown
+---
+title: "My Project"
+summary: "One sentence that shows up on the card."
+year: 2026
+status: shipped          # shipped | in-progress | experiment | archived
+tags: ["nextjs", "typescript"]
+stack: ["Next.js", "TypeScript", "PostgreSQL"]
+links:
+  - { label: "Live", href: "https://example.com" }
+  - { label: "Source", href: "https://github.com/you/project" }
+cover: /projects/my-project.webp   # optional, place the file in /public/projects/
+accent: "#6366f1"                  # optional, colour for the generated cover
+featured: true                     # optional
+---
+
+The body of the project. **Markdown works**, including:
+
+- Bullet lists and `code` blocks
+- Headings, links, quotes, and tables
+```
+
+The filename becomes the slug, so `my-project.md` → `my-project`.
+
+### 4. Colours and fonts
+
+Design tokens live in `src/app/globals.css`. The light and dark palettes are
+CSS variables under `:root` and `.dark`; change them there and the whole site
+follows. Fonts are configured in `src/app/layout.tsx` via `next/font`.
+
+### 5. Images
+
+Drop a file in `public/projects/` and reference it from the frontmatter with
+`cover: /projects/your-file.webp`. Without a cover, the site generates a
+gradient from the project's `accent` colour.
+
+## How it works
+
+```
+content/projects/*.md   <- your content
+        |
+src/lib/projects.ts     <- reads + parses frontmatter (server only)
+src/lib/markdown.ts     <- markdown -> sanitised HTML
+        |
+src/app/page.tsx        <- server component, prerendered at build time
+        |
+src/components/project-grid.tsx  <- client: filtering + modal
+```
+
+A few implementation notes:
+
+- **The whole page is static.** Every route is prerendered at build time, so
+  there is no server to run and nothing to fetch on the client.
+- **The theme never flashes.** A tiny inline script in `<head>` applies your
+  saved theme before the first paint.
+- **Markdown is sanitised.** Raw HTML is dropped and the output tree is passed
+  through `rehype-sanitize`.
+- **Reads are synchronous.** With Next.js 16's Cache Components enabled,
+  synchronous file reads during prerender keep the page fully static. No
+  `use cache` directive or Suspense boundary is required.
+
+## Project structure
+
+```
+src/
+  app/
+    layout.tsx        fonts, metadata, theme bootstrap
+    page.tsx          the one-page portfolio
+    globals.css       design tokens + Tailwind theme
+    not-found.tsx
+    robots.ts
+    sitemap.ts
+    opengraph-image.tsx / twitter-image.tsx   social share image
+  components/
+    hero.tsx
+    site-header.tsx / site-footer.tsx
+    project-grid.tsx  client: tag filters
+    project-card.tsx
+    project-dialog.tsx  client: accessible modal
+    theme-toggle.tsx  client
+    icons.tsx
+  lib/
+    site.ts           your details
+    projects.ts       markdown loader
+    markdown.ts       markdown renderer
+    og-image.tsx      social share image
+    types.ts
+content/projects/      <- your project files
+public/
+  cv-didi-rudiat.pdf   <- your CV
+```
+
+## Deploying
+
+The site builds to a static-friendly output and deploys anywhere:
+
+- **Vercel** — import the repo, the defaults work.
+- **Netlify / Cloudflare Pages** — build command `npm run build`, publish
+  directory `.next` (or use `output: "export"` in `next.config.ts` for a fully
+  static export).
+
+Set `site.url` to your domain before deploying so links and the sitemap are
+correct.
+
+## Adding individual project pages later
+
+The grid is a single page by design. If you later want shareable URLs like
+`/projects/my-project`, add `src/app/projects/[slug]/page.tsx` using
+`getProject(slug)` and add `generateStaticParams` — the content layer is
+already built for it.
