@@ -1,5 +1,6 @@
 import { LinkIconGlyph } from "@/components/icons";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { asset } from "@/lib/base-path";
 import { site } from "@/lib/site";
 
 export function SiteHeader() {
@@ -12,6 +13,11 @@ export function SiteHeader() {
         >
           <span
             aria-hidden
+            style={
+              {
+                "--logo-mark-url": `url("${asset("/logo-mark.png")}")`,
+              } as React.CSSProperties
+            }
             className="logo-mark h-7 w-8 shrink-0 text-brand transition-transform duration-200 group-hover:scale-105"
           />
           <span className="hidden sm:inline">{site.name}</span>

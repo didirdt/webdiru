@@ -138,16 +138,20 @@
  *
  * The mark and the lockup are used as CSS masks so a single asset can
  * be recoloured to follow the theme (brand navy on light, pale on dark).
+ *
+ * The URL is injected as a custom property from the component (see
+ * `src/lib/assets.ts`) because a static export deploys under a base
+ * path, and CSS `url()` values are not rewritten by Next.js.
  * ------------------------------------------------------------------ */
 .logo-mark {
-  -webkit-mask: url("/logo-mark.png") center / contain no-repeat;
-  mask: url("/logo-mark.png") center / contain no-repeat;
+  -webkit-mask: var(--logo-mark-url) center / contain no-repeat;
+  mask: var(--logo-mark-url) center / contain no-repeat;
   background-color: currentColor;
 }
 
 .logo-lockup {
-  -webkit-mask: url("/logo-lockup.png") center / contain no-repeat;
-  mask: url("/logo-lockup.png") center / contain no-repeat;
+  -webkit-mask: var(--logo-lockup-url) center / contain no-repeat;
+  mask: var(--logo-lockup-url) center / contain no-repeat;
   background-color: currentColor;
 }
 

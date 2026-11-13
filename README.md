@@ -196,11 +196,16 @@ src/
     icons.tsx
   lib/
     site.ts           your details + expertise groups
+    base-path.ts      base path handling for static hosts
     projects.ts       markdown loader
     markdown.ts       markdown renderer
     og-image.tsx      social share image
     types.ts
 content/projects/      <- your project files
+scripts/
+  postbuild.mjs       static-host fixes (.nojekyll, social image)
+  serve.mjs           local preview of out/
+  build-server.mjs    optional Node server build
 public/
   cv-didi-rudiat.pdf   <- your CV
   foto.jpg             <- your portrait
@@ -224,6 +229,49 @@ The site builds to a static-friendly output and deploys anywhere:
 
 Set `site.url` to your domain before deploying so links and the sitemap are
 correct.
+
+## Deploying
+
+The site builds to a fully static export in `out/` — no server required.
+
+```bash
+npm run build     # static export -> out/
+npm run preview   # serve out/ at http://localhost:4173
+npm run build:server   # optional: Node server bundle instead
+```
+
+### GitHub Pages (free)
+
+The build is automated by `.github/workflows/deploy.yml`. To switch it on:
+
+1. **Repo → Settings → Pages → Source: "GitHub Actions"**
+2. Push to `main` — the workflow builds and deploys
+3. The site appears at `https://didirdt.github.io/webdiru`
+
+A project Pages site is served from a sub-path, so the build sets
+`NEXT_BASE_PATH=webdiru`. If you later point `didiru.web.id` at GitHub Pages,
+set `NEXT_BASE_PATH` to empty and `CUSTOM_DOMAIN` to `didiru.web.id` in the
+workflow file — the site then moves to the domain root and a `CNAME` file is
+written automatically.
+
+### Other hosts
+
+`out/` is a plain static folder — drop it on Netlify, Cloudflare Pages, Vercel,
+or any web server. Set `NEXT_BASE_PATH` if the site is not served from the
+domain root.
+
+### What the deployment handles
+
+| Issue | Fix |
+| --- | --- |
+| GitHub Pages' Jekyll ignores `_next/` | `scripts/postbuild.mjs` writes `.nojekyll` |
+| Extensionless OG image breaks card scrapers | Postbuild copies it to `og.png` and re-points the meta tags |
+| Images and CSS URLs ignore the base path | `src/lib/base-path.ts` prefixes them |
+| `output: "export"` rejects `export const dynamic` | Route handlers opt in with `generateStaticParams` |
+
+> Note: `output: "export"` and Cache Components (Partial Prerendering) cannot
+> be combined. The export is the default because the site has no dynamic
+> features; `npm run build:server` produces a Node bundle with both enabled.
 
 ## Adding individual project pages later
 

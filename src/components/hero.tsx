@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { ArrowUpRightIcon, DownloadIcon } from "@/components/icons";
+import { asset } from "@/lib/base-path";
 import { site } from "@/lib/site";
 
 type HeroProps = {
@@ -52,7 +53,7 @@ export function Hero({ projectCount, stackCount }: HeroProps) {
                 className="absolute -inset-2.5 rounded-[2.25rem] bg-gradient-to-br from-accent/30 via-accent/5 to-transparent blur-2xl"
               />
               <Image
-                src="/foto.jpg"
+                src={asset("/foto.jpg")}
                 alt={`${site.name}, ${site.role}`}
                 width={800}
                 height={800}

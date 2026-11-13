@@ -22,6 +22,17 @@ export type SkillGroup = {
 };
 
 /**
+ * The canonical origin of the deployed site.
+ *
+ * Defaults to the custom domain. Set NEXT_PUBLIC_SITE_URL at build time when
+ * deploying somewhere else (for example a GitHub Pages project URL) so the
+ * metadata, sitemap and share images point at the right origin.
+ */
+const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://didiru.web.id"
+).replace(/\/+$/, "");
+
+/**
  * Single source of truth for everything that is "about you".
  * Edit this file to make the site yours.
  */
@@ -34,7 +45,7 @@ export const site = {
   email: "Didi.RudiatD12@gmail.com",
   phone: "+62 838 2200 1125",
   /** Canonical origin of the deployed site. Used for metadata / sitemap. */
-  url: "https://didiru.web.id",
+  url: siteUrl,
   /** Path to the CV PDF, served from /public. */
   cv: "/cv-didi-rudiat.pdf",
   /** Hard-coded on purpose: `new Date()` is not allowed during prerender. */

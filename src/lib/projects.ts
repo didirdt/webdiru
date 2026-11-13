@@ -6,6 +6,7 @@ import path from "node:path";
 import matter from "gray-matter";
 
 import { renderMarkdown } from "@/lib/markdown";
+import { asset } from "@/lib/base-path";
 import { PROJECT_STATUSES, type Project, type ProjectLink, type ProjectStatus } from "@/lib/types";
 
 const PROJECTS_DIR = path.join(process.cwd(), "content", "projects");
@@ -72,8 +73,8 @@ function parseProject(fileName: string): Project {
   const fm = data as Frontmatter;
 
   const year = Number(fm.year);
-  const cover = typeof fm.cover === "string" && fm.cover.trim() ? fm.cover.trim() : null;
-  const image = typeof fm.image === "string" && fm.image.trim() ? fm.image.trim() : null;
+  const cover = typeof fm.cover === "string" && fm.cover.trim() ? asset(fm.cover.trim()) : null;
+  const image = typeof fm.image === "string" && fm.image.trim() ? asset(fm.image.trim()) : null;
   const accent = typeof fm.accent === "string" && fm.accent.trim() ? fm.accent.trim() : null;
 
   return {

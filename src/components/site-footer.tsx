@@ -1,4 +1,5 @@
 import { DownloadIcon, LinkIconGlyph } from "@/components/icons";
+import { asset } from "@/lib/base-path";
 import { site } from "@/lib/site";
 
 export function SiteFooter() {
@@ -6,7 +7,15 @@ export function SiteFooter() {
     <footer className="mt-24 border-t border-border">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-8">
         <div className="space-y-4">
-          <span aria-hidden className="logo-lockup block h-16 w-[5.5rem] text-brand" />
+          <span
+            aria-hidden
+            style={
+              {
+                "--logo-lockup-url": `url("${asset("/logo-lockup.png")}")`,
+              } as React.CSSProperties
+            }
+            className="logo-lockup block h-16 w-[5.5rem] text-brand"
+          />
           <div className="space-y-1">
             <p className="text-sm text-muted">
               {site.role} · {site.location}
